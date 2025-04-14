@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>flutter_notification_test</title>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaeuDNhkBe6k5xVV43gNucvYdDLdlsiJ8"></script>
+</head>
+
+<body>
+
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAsx8wqPvMs7hdTTeDdO8qUBmiqLcuKp5M",
+      authDomain: "emergency-app-2d5d7.firebaseapp.com",
+      projectId: "emergency-app-2d5d7",
+      storageBucket: "emergency-app-2d5d7.appspot.com",
+      messagingSenderId: "619428390108",
+      appId: "1:619428390108:web:c5cc220a5b3c010a17c019",
+      measurementId: "G-SL6ZRHS2VR"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Initialize Firebase Cloud Messaging and get a reference to the service
+    const messaging = firebase.messaging();
+
+    // Handle incoming messages. Called when:
+    // - a message is received while the app has focus
+    // - the user clicks on an app notification created by a service worker
+    messaging.onMessage((payload) => {
+      console.log('Message received. ', payload);
+      // Customize notification handling here, if necessary
+    });
+  </script>
+
+  <script src="main.dart.js" type="application/javascript"></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/firebase-messaging-sw.js")
+          .then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+          })
+          .catch((err) => {
+            console.error('Service Worker registration failed:', err);
+          });
+      });
+    }
+  </script>
+  
+</body>
+
+</html>
